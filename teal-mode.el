@@ -1,4 +1,4 @@
-;;; teal-mode.el --- Improved JavaScript editing mode -*- lexical-binding: t -*-
+;;; teal-mode.el --- Teal Lang editing mode -*- lexical-binding: t -*-
 
 ;; Author: Ric da Silva <ric@condense9.com>
 ;; URL:  https://github.com/condense9/teal-mode
