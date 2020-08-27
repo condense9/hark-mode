@@ -1,7 +1,7 @@
-;;; teal-mode.el --- Teal Lang editing mode -*- lexical-binding: t -*-
+;;; felt-mode.el --- Felt Lang editing mode -*- lexical-binding: t -*-
 
 ;; Author: Ric da Silva <ric@condense9.com>
-;; URL:  https://github.com/condense9/teal-mode
+;; URL:  https://github.com/condense9/felt-mode
 ;; Keywords: languages
 ;; License: MIT
 
@@ -36,42 +36,42 @@
 
 ;;
 
-(defvar teal-mode-syntax-table
+(defvar felt-mode-syntax-table
   (let ((table (make-syntax-table)))
     (c-populate-syntax-table table)
     (modify-syntax-entry ?` "\"" table)
     table)
-  "Syntax table used in `teal-mode' buffers.")
+  "Syntax table used in `felt-mode' buffers.")
 
-(defvar teal-mode-abbrev-table nil
-  "Abbrev table in use in `teal-mode' buffers.")
+(defvar felt-mode-abbrev-table nil
+  "Abbrev table in use in `felt-mode' buffers.")
 
-(define-abbrev-table 'teal-mode-abbrev-table ())
+(define-abbrev-table 'felt-mode-abbrev-table ())
 
-(defvar teal-mode-map
+(defvar felt-mode-map
   (let ((map (make-sparse-keymap)))
 
     map)
-  "Keymap used in `teal-mode' buffers.")
+  "Keymap used in `felt-mode' buffers.")
 
 
 ;; See http://www.modernemacs.com/post/major-mode-part-1/
 
-(defconst teal--kwds-builtin
+(defconst felt--kwds-builtin
   '("import" "future" "print" "sleep" "atomp" "nullp" "list" "conc" "append"
     "first" "rest" "length" "hash" "get" "set" "nth" "parse_float" "signal"
     "sid" "tid")
-  "Teal language builtins")
+  "Felt language builtins")
 
-(defconst teal--builtins
+(defconst felt--builtins
   (list
    (rx-to-string
-    `(: (or ,@teal--kwds-builtin)))
+    `(: (or ,@felt--kwds-builtin)))
 
    '(0 font-lock-builtin-face)))
 
 
-(defconst teal--definition
+(defconst felt--definition
   (list
    (rx-to-string
     `(: (group-n 1 "fn")
@@ -81,25 +81,25 @@
    '(1 font-lock-keyword-face)
    '(2 font-lock-function-name-face)))
 
-(defconst teal--highlights
+(defconst felt--highlights
   (list '("if\\|else\\|async\\|await" . font-lock-keyword-face)
         '("true\\|false\\|nil" . font-lock-constant-face)
-        teal--builtins
-        teal--definition))
+        felt--builtins
+        felt--definition))
 
 
 ;;;###autoload
-(define-derived-mode teal-mode prog-mode "Teal"
-  "Major mode for editing Teal code.
-\\{teal-mode-map}"
-  :syntax-table teal-mode-syntax-table
-  :abbrev-table teal-mode-abbrev-table
+(define-derived-mode felt-mode prog-mode "Felt"
+  "Major mode for editing Felt code.
+\\{felt-mode-map}"
+  :syntax-table felt-mode-syntax-table
+  :abbrev-table felt-mode-abbrev-table
   ;; (add-hook 'completion-at-point-functions
-  ;;           #'teal-complete-keyword-at-point nil 'local)
+  ;;           #'felt-complete-keyword-at-point nil 'local)
   (setq comment-start "// ")
-  (setq font-lock-defaults '(teal--highlights)))
+  (setq font-lock-defaults '(felt--highlights)))
 
 
-(provide 'teal-mode)
+(provide 'felt-mode)
 
-;;; teal-mode.el ends here
+;;; felt-mode.el ends here
