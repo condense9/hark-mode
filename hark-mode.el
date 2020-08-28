@@ -1,7 +1,7 @@
-;;; felt-mode.el --- Felt Lang editing mode -*- lexical-binding: t -*-
+;;; hark-mode.el --- Hark Lang editing mode -*- lexical-binding: t -*-
 
 ;; Author: Ric da Silva <ric@condense9.com>
-;; URL:  https://github.com/condense9/felt-mode
+;; URL:  https://github.com/condense9/hark-mode
 ;; Keywords: languages
 ;; License: MIT
 
@@ -36,42 +36,42 @@
 
 ;;
 
-(defvar felt-mode-syntax-table
+(defvar hark-mode-syntax-table
   (let ((table (make-syntax-table)))
     (c-populate-syntax-table table)
     (modify-syntax-entry ?` "\"" table)
     table)
-  "Syntax table used in `felt-mode' buffers.")
+  "Syntax table used in `hark-mode' buffers.")
 
-(defvar felt-mode-abbrev-table nil
-  "Abbrev table in use in `felt-mode' buffers.")
+(defvar hark-mode-abbrev-table nil
+  "Abbrev table in use in `hark-mode' buffers.")
 
-(define-abbrev-table 'felt-mode-abbrev-table ())
+(define-abbrev-table 'hark-mode-abbrev-table ())
 
-(defvar felt-mode-map
+(defvar hark-mode-map
   (let ((map (make-sparse-keymap)))
 
     map)
-  "Keymap used in `felt-mode' buffers.")
+  "Keymap used in `hark-mode' buffers.")
 
 
 ;; See http://www.modernemacs.com/post/major-mode-part-1/
 
-(defconst felt--kwds-builtin
+(defconst hark--kwds-builtin
   '("import" "future" "print" "sleep" "atomp" "nullp" "list" "conc" "append"
     "first" "rest" "length" "hash" "get" "set" "nth" "parse_float" "signal"
     "sid" "tid")
-  "Felt language builtins")
+  "Hark language builtins")
 
-(defconst felt--builtins
+(defconst hark--builtins
   (list
    (rx-to-string
-    `(: (or ,@felt--kwds-builtin)))
+    `(: (or ,@hark--kwds-builtin)))
 
    '(0 font-lock-builtin-face)))
 
 
-(defconst felt--definition
+(defconst hark--definition
   (list
    (rx-to-string
     `(: (group-n 1 "fn")
@@ -81,25 +81,25 @@
    '(1 font-lock-keyword-face)
    '(2 font-lock-function-name-face)))
 
-(defconst felt--highlights
+(defconst hark--highlights
   (list '("if\\|else\\|async\\|await" . font-lock-keyword-face)
         '("true\\|false\\|nil" . font-lock-constant-face)
-        felt--builtins
-        felt--definition))
+        hark--builtins
+        hark--definition))
 
 
 ;;;###autoload
-(define-derived-mode felt-mode prog-mode "Felt"
-  "Major mode for editing Felt code.
-\\{felt-mode-map}"
-  :syntax-table felt-mode-syntax-table
-  :abbrev-table felt-mode-abbrev-table
+(define-derived-mode hark-mode prog-mode "Hark"
+  "Major mode for editing Hark code.
+\\{hark-mode-map}"
+  :syntax-table hark-mode-syntax-table
+  :abbrev-table hark-mode-abbrev-table
   ;; (add-hook 'completion-at-point-functions
-  ;;           #'felt-complete-keyword-at-point nil 'local)
+  ;;           #'hark-complete-keyword-at-point nil 'local)
   (setq comment-start "// ")
-  (setq font-lock-defaults '(felt--highlights)))
+  (setq font-lock-defaults '(hark--highlights)))
 
 
-(provide 'felt-mode)
+(provide 'hark-mode)
 
-;;; felt-mode.el ends here
+;;; hark-mode.el ends here

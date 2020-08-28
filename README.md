@@ -1,2 +1,2 @@
-# felt-mode
-Emacs major mode for [Felt](https://github.com/condense9/felt-lang/).
+# hark-mode
+Emacs major mode for [Hark](https://github.com/condense9/hark-lang/).
